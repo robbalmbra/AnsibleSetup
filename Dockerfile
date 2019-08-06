@@ -4,22 +4,22 @@ RUN apt-get update && \
     apt-get clean all
 
 RUN apt-get update && apt-get install -y \ 
+ python3 \
  build-essential \ 
- python \ 
- python-dev \ 
+ python3-dev \ 
  libxml2-dev \ 
  libxslt-dev \ 
  libssl-dev \ 
  zlib1g-dev \ 
  libyaml-dev \ 
  libffi-dev \ 
- python-pip
+ python3-pip
 
-RUN pip install --upgrade pip \ 
+RUN pip3 install --upgrade pip \ 
  virtualenv \ 
  requests
 
-RUN ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 RUN mkdir /var/run/sshd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
