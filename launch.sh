@@ -4,10 +4,14 @@
 NODES=5
 PORT=2222
 
+# Copy SSH key
+ssh-keygen 2>/dev/null
+
 # Build
 docker build -t ansible-ssh . 1>/dev/null
 
 # Flush inventory file and ssh.config
+mkdir ansible 2>/dev/null
 echo "[servers]" > ansible/inventory
 echo -e "Host *\n    StrictHostKeyChecking no\n    UserKnownHostsFile /dev/null\n    HashKnownHosts yes\n    IdentityFile ~/.ssh/id_rsa" > ansible/ssh.config
 
