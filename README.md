@@ -1,5 +1,5 @@
 # AnsibleSetup
 
-## Usage: ./launch [Number of Nodes]
+#### Usage: ./launch [Number of Nodes]
 
-## Note: Node defualts to 5.
+#### Note: Node defualts to 5.
