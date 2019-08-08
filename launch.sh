@@ -11,7 +11,7 @@ fi
 
 # Copy SSH key
 if [ ! -f  ~/.ssh/id_rsa.pub ]; then
-  ssh-keygen 2>/dev/null
+  ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 fi
 cp ~/.ssh/id_rsa.pub .
 

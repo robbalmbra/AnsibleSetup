@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y openssh-server pwgen netcat net-tools curl wget && \
     apt-get clean all
 
@@ -19,6 +20,7 @@ RUN pip3 install --upgrade pip \
  virtualenv \ 
  requests
 
+RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 RUN mkdir /var/run/sshd
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
