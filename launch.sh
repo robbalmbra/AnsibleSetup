@@ -4,6 +4,16 @@
 NODES=5
 PORT=2222
 
+if [ $# -eq 1 ]; then
+ if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+   echo "Error - Input isnt a whole number."
+   exit 1;
+ fi
+
+ echo "Setting node count to $1";
+ NODES=$1;
+fi
+
 if [ ! -x "$(command -v docker)" ]; then
   echo "Error - Docker isnt installed."
   exit 1;
