@@ -4,10 +4,19 @@
 NODES=5
 PORT=2222
 
+if [ ! -x "$(command -v docker)" ]; then
+  echo "Error - Docker isnt installed."
+  exit 1;
+fi
+
 # Copy SSH key
-ssh-keygen 2>/dev/null
+if [ ! -f  ~/.ssh/id_rsa.pub ]; then
+  ssh-keygen 2>/dev/null
+fi
+cp ~/.ssh/id_rsa.pub .
 
 # Build
+echo "Building docker image..."
 docker build -t ansible-ssh . 1>/dev/null
 
 # Flush inventory file and ssh.config
@@ -15,6 +24,7 @@ mkdir ansible 2>/dev/null
 echo "[servers]" > ansible/inventory
 echo -e "Host *\n    StrictHostKeyChecking no\n    UserKnownHostsFile /dev/null\n    HashKnownHosts yes\n    IdentityFile ~/.ssh/id_rsa" > ansible/ssh.config
 
+echo "Stopping and starting containers..."
 for ((i=1; i <= $NODES; i++)); do
 
   # Stop and delete old containers
@@ -35,3 +45,4 @@ for ((i=1; i <= $NODES; i++)); do
 
   ((PORT++))
 done
+echo "Complete"
