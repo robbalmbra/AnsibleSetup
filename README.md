@@ -2,4 +2,4 @@
 
 #### Usage: ./launch [Number of Nodes]
 
-#### Note: Node defualts to 5.
+#### Note: Node defaults to 5.
